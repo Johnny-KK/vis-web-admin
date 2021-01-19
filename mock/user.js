@@ -1,89 +1,84 @@
-const mockjs= require('mockjs');
-const { VUE_APP_APIHOST } = process.env;
-const ajaxHeadersTokenKey = 'x-token';
-const mock = {};
 
-mock[`GET ${VUE_APP_APIHOST}/user/info`] = (req, res) => {
-    const headers = req.headers;
-    if (headers[ajaxHeadersTokenKey] === 'admin') {
-        res.send({
-          code: 0,
-          data: {
-            id: 1,
-            name: 'Admins',
-            avatar: '',
-            roles: ['admin'],
-          },
-        });
-    } else if (headers[ajaxHeadersTokenKey] === 'user') {
-        res.send({
-          code: 0,
-          data: {
-            id: 2,
-            name: 'Users',
-            avatar: '',
-            roles: ['user'],
-          },
-        });
-    } else if (headers[ajaxHeadersTokenKey] === 'test') {
-        res.send({
-          code: 0,
-          data: {
-            id: 3,
-            name: 'Tests',
-            avatar: '',
-            roles: ['test'],
-          },
-        });
-    } else {
-        res.send({
-          code: 10002,
-          data: {},
-          msg: '未登录',
-        });
+const tokens = {
+  admin: {
+    token: 'admin-token'
+  },
+  editor: {
+    token: 'editor-token'
+  }
+}
+
+const users = {
+  'admin-token': {
+    roles: ['admin'],
+    introduction: 'I am a super administrator',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    name: 'Super Admin'
+  },
+  'editor-token': {
+    roles: ['editor'],
+    introduction: 'I am an editor',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    name: 'Normal Editor'
+  }
+}
+
+module.exports = [
+  // user login
+  {
+    url: '/vue-element-admin/user/login',
+    type: 'post',
+    response: config => {
+      const { username } = config.body
+      const token = tokens[username]
+
+      // mock error
+      if (!token) {
+        return {
+          code: 60204,
+          message: 'Account and password are incorrect.'
+        }
+      }
+
+      return {
+        code: 20000,
+        data: token
+      }
     }
+  },
 
-};
+  // get user info
+  {
+    url: '/vue-element-admin/user/info\.*',
+    type: 'get',
+    response: config => {
+      const { token } = config.query
+      const info = users[token]
 
-mock[`GET ${VUE_APP_APIHOST || ''}/user/message`] = (req, res) => {
-    res.send({
-      code: 0,
-      data: mockjs.mock('@integer(0,99)'),
-    });
-};
-  
-mock[`POST ${VUE_APP_APIHOST || ''}/user/login`] = (req, res) => {
-    const { password, username } = req.body;
-    const send = { code: 0, data: {}, msg: '' };
-    if (username === 'admin' && password === '123456') {
-        send['data'] = {
-        token: 'admin',
-        };
-    } else if (username === 'user' && password === '123456') {
-        send['data'] = {
-        token: 'user',
-        };
-    } else if (username === 'test' && password === '123456') {
-        send['data'] = {
-        token: 'test',
-        };
-    } else {
-        send['code'] = 201;
-        send['msg'] = 'Wrong username or password';
+      // mock error
+      if (!info) {
+        return {
+          code: 50008,
+          message: 'Login failed, unable to get user details.'
+        }
+      }
+
+      return {
+        code: 20000,
+        data: info
+      }
     }
+  },
 
-    res.send(send);
-};
-  
-mock[`POST ${VUE_APP_APIHOST || ''}/user/register`] = (req, res) => {
-    res.send({
-      code: 0,
-      data: '',
-      msg: '',
-    });
-};
-  
-
-module.exports = {
-  ...mock
-};
+  // user logout
+  {
+    url: '/vue-element-admin/user/logout',
+    type: 'post',
+    response: _ => {
+      return {
+        code: 20000,
+        data: 'success'
+      }
+    }
+  }
+]
