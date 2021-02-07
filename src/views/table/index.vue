@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <el-table
+      v-loading="listLoading"
       :data="list"
       element-loading-text="Loading"
       border
@@ -43,19 +44,36 @@
 </template>
 
 <script>
-import { apiQueryServerList } from '@/api/server.js'
+import { getList } from '@/api/table'
 
 export default {
-  name: 'Server',
-  data() {
-    return {
-      list: []
+  filters: {
+    statusFilter(status) {
+      const statusMap = {
+        published: 'success',
+        draft: 'gray',
+        deleted: 'danger'
+      }
+      return statusMap[status]
     }
   },
-  mounted() {
-    apiQueryServerList().then(res => {
-      console.log(res)
-    })
+  data() {
+    return {
+      list: null,
+      listLoading: true
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      this.listLoading = true
+      getList().then(response => {
+        this.list = response.data.items
+        this.listLoading = false
+      })
+    }
   }
 }
 </script>
