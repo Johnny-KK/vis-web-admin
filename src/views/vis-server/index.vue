@@ -47,7 +47,7 @@ import ServeForm from './components/serve-form.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ServerVo, ServerWithServeVo } from '@/core/entities';
-import { apiQueryServerListWithServe } from '@/core/apis';
+import { apiQueryServerListWithServe, apiDelServerById } from '@/core/apis';
 
 export default defineComponent({
   name: 'vis-server',
@@ -97,6 +97,12 @@ export default defineComponent({
         ElMessage.warning('请先选择一条数据');
         return false;
       }
+      apiDelServerById(this.server.selected.id).then(res => {
+        if (res.success) {
+          ElMessage.success(res.msg);
+          this.reload();
+        }
+      });
     },
     // 重载数据
     reload() {

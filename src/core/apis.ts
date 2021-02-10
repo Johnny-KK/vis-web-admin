@@ -18,6 +18,11 @@ export function apiSaveServer(form: ServerVo) {
   return http.post('/server/saveServer', form);
 }
 
+// 删除服务器
+export function apiDelServerById(id: string) {
+  return http.get('/server/delServerById', {params: {id}})
+}
+
 // 保存服务信息
 export function apiSaveServe(form: ServeVo) {
   return http.post('/serve/saveServe', form);
