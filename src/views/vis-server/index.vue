@@ -27,6 +27,7 @@
     <el-table-column prop="serverOs" label="操作系统" width="180"> </el-table-column>
     <el-table-column prop="serverIp" label="IP" width="180"> </el-table-column>
     <el-table-column prop="serverDomain" label="域名" width="180"> </el-table-column>
+    <el-table-column prop="isVirtual" label="是否虚拟机" width="180"> </el-table-column>
     <el-table-column prop="rmk" label="备注"> </el-table-column>
   </el-table>
 

@@ -3,11 +3,20 @@
     <el-form-item label="服务器">
       <el-input v-model="server.form.name"></el-input>
     </el-form-item>
+    <el-form-item label="操作系统">
+      <el-input v-model="server.form.os"></el-input>
+    </el-form-item>
     <el-form-item label="IP">
       <el-input v-model="server.form.ip"></el-input>
     </el-form-item>
     <el-form-item label="域名">
       <el-input v-model="server.form.domain"></el-input>
+    </el-form-item>
+    <el-form-item label="虚拟机">
+      <el-radio-group v-model="server.form.isVirtual">
+        <el-radio label="Y">是</el-radio>
+        <el-radio label="N">否</el-radio>
+      </el-radio-group>
     </el-form-item>
     <el-form-item label="备注">
       <el-input v-model="server.form.rmk" type="textarea"></el-input>
@@ -28,7 +37,7 @@ import { apiSaveServer } from '@/core/apis';
 export default defineComponent({
   name: 'server-form',
   setup() {
-    const server: { form: ServerVo } = reactive({ form: { name: '', ip: '', domain: '', rmk: '' } });
+    const server: { form: ServerVo } = reactive({ form: { name: '', os: '', ip: '', domain: '', isVirtual: 'N', rmk: '' } });
 
     return { server };
   },

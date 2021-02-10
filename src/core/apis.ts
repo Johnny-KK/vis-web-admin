@@ -20,7 +20,7 @@ export function apiSaveServer(form: ServerVo) {
 
 // 删除服务器
 export function apiDelServerById(id: string) {
-  return http.get('/server/delServerById', {params: {id}})
+  return http.get('/server/delServerById', { params: { id } });
 }
 
 // 保存服务信息
