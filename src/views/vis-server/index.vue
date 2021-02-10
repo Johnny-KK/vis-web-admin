@@ -7,6 +7,7 @@
       <el-button @click="queryServerList">查询</el-button>
       <el-button @click="showServerForm">添加服务器</el-button>
       <el-button @click="delServer">删除服务器</el-button>
+      <el-button @click="editServer">修改服务器</el-button>
       <el-button @click="showServeForm">添加服务</el-button>
     </el-form-item>
   </el-form>
@@ -31,6 +32,7 @@
   <el-dialog title="添加服务器" v-model="isShowServerForm" width="60%" :close-on-click-modal="false" :destroy-on-close="true">
     <server-form @reload="reload"></server-form>
   </el-dialog>
+
   <el-dialog title="添加服务" v-model="isShowServeForm" width="60%" :close-on-click-modal="false" :destroy-on-close="true">
     <serve-form :server="server.selected" @reload="reload"></serve-form>
   </el-dialog>
@@ -103,6 +105,14 @@ export default defineComponent({
           this.reload();
         }
       });
+    },
+    // 修改服务器
+    editServer() {
+      if (this.server.selected === null) {
+        ElMessage.warning('请先选择一条数据');
+        return false;
+      }
+      this.isShowServerForm = true;
     },
     // 重载数据
     reload() {
