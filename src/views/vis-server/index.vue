@@ -24,6 +24,7 @@
     </el-table-column>
     <el-table-column type="index" width="50"> </el-table-column>
     <el-table-column prop="serverName" label="服务器" width="180"> </el-table-column>
+    <el-table-column prop="serverOs" label="操作系统" width="180"> </el-table-column>
     <el-table-column prop="serverIp" label="IP" width="180"> </el-table-column>
     <el-table-column prop="serverDomain" label="域名" width="180"> </el-table-column>
     <el-table-column prop="rmk" label="备注"> </el-table-column>
