@@ -15,10 +15,11 @@
   <el-table :data="server.list" border style="width: 100%" highlight-current-row @current-change="handleCurrentChange">
     <el-table-column type="expand">
       <template #default="{row}">
-        <el-table :data="row.serveList" :border="false" :stripe="true" style="width: 100%">
+        <el-table :data="row.serveList" :border="true" :stripe="true" style="width: 100%">
           <el-table-column type="index" width="50"> </el-table-column>
           <el-table-column prop="serveName" label="服务"> </el-table-column>
           <el-table-column prop="servePort" label="端口" width="180"> </el-table-column>
+          <el-table-column prop="isDocker" label="Docker" width="180"> </el-table-column>
         </el-table>
       </template>
     </el-table-column>
@@ -49,8 +50,7 @@ import { ElMessage } from 'element-plus';
 import ServerForm from './components/server-form.vue';
 import ServeForm from './components/serve-form.vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ServerVo, ServerWithServeVo } from '@/core/entities';
+import { ServerWithServeVo } from '@/core/entities';
 import { apiQueryServerListWithServe, apiDelServerById } from '@/core/apis';
 
 export default defineComponent({

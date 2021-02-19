@@ -18,7 +18,7 @@ export interface ServerVo {
   os: string; // 操作系统
   ip: string; // 服务器IP
   domain: string; // 域名
-  isVirtual: string // 是否是虚拟机 Y/N
+  isVirtual: string; // 是否是虚拟机 Y/N
   rmk: string; // 备注
 }
 

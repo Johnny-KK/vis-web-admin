@@ -1,5 +1,5 @@
-app_name="vis-web-admin"
-app_version="0.0.2"
+source .env
+
 docker_user="vis"
 docker_pwd="visPower@2021"
 docker_project="vis"
@@ -18,8 +18,8 @@ npm run build
 
 docker login --username=${docker_user} --password=${docker_pwd} ${docker_domain}
 
-docker build -t ${docker_domain}/${docker_project}/${app_name}:${app_version} .
+docker build -t ${docker_domain}/${docker_project}/${VUE_APP_NAME}:${VUE_APP_RELEASE_VERSION} .
 
-docker image ls ${app_name}
+docker image ls ${VUE_APP_NAME}
 
-docker push ${docker_domain}/${docker_project}/${app_name}:${app_version}
+docker push ${docker_domain}/${docker_project}/${VUE_APP_NAME}:${VUE_APP_RELEASE_VERSION}
