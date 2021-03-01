@@ -18,7 +18,7 @@ export interface ServerVo {
   os: string; // 操作系统
   ip: string; // 服务器IP
   domain: string; // 域名
-  isVirtual: string // 是否是虚拟机 Y/N
+  isVirtual: string; // 是否是虚拟机 Y/N
   rmk: string; // 备注
 }
 
@@ -39,9 +39,12 @@ export interface ServerWithServeVo {
   serverName: string; // 服务器名称
   serverIp: string; // 服务器IP
   serverDomain: string; // 服务器域名
+  serverRmk: string; // 服务器备注
   serveList: {
     serveId: string; // 服务ID
     serveName: string; // 服务名称
     servePort: string; // 服务端口
+    serveRmk: string; // 服务备注
+    serveIsDocker: string; // 是否是Docker
   }[]; // 下属服务列表
 }

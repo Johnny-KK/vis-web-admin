@@ -1,5 +1,5 @@
 app_name="vis-web-admin"
-app_version="0.0.2"
+app_version="0.0.8"
 docker_user="vis"
 docker_pwd="visPower@2021"
 docker_project="vis"

@@ -15,10 +15,12 @@
   <el-table :data="server.list" border style="width: 100%" highlight-current-row @current-change="handleCurrentChange">
     <el-table-column type="expand">
       <template #default="{row}">
-        <el-table :data="row.serveList" :border="false" :stripe="true" style="width: 100%">
+        <el-table :data="row.serveList" :border="true" :stripe="true" style="width: 100%">
           <el-table-column type="index" width="50"> </el-table-column>
-          <el-table-column prop="serveName" label="服务"> </el-table-column>
+          <el-table-column prop="serveName" label="服务" width="150"> </el-table-column>
           <el-table-column prop="servePort" label="端口" width="180"> </el-table-column>
+          <el-table-column prop="serveIsDocker" label="Docker" width="100"> </el-table-column>
+          <el-table-column prop="serveRmk" label="备注"> </el-table-column>
         </el-table>
       </template>
     </el-table-column>
@@ -28,7 +30,7 @@
     <el-table-column prop="serverIp" label="IP" width="180"> </el-table-column>
     <el-table-column prop="serverDomain" label="域名" width="180"> </el-table-column>
     <el-table-column prop="isVirtual" label="是否虚拟机" width="180"> </el-table-column>
-    <el-table-column prop="rmk" label="备注"> </el-table-column>
+    <el-table-column prop="serverRmk" label="备注"> </el-table-column>
   </el-table>
 
   <el-dialog title="添加服务器" v-model="isShowServerForm" width="60%" :close-on-click-modal="false" :destroy-on-close="true">
