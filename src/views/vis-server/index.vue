@@ -51,8 +51,7 @@ import { ElMessage } from 'element-plus';
 import ServerForm from './components/server-form.vue';
 import ServeForm from './components/serve-form.vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ServerVo, ServerWithServeVo } from '@/core/entities';
+import { ServerWithServeVo } from '@/core/entities';
 import { apiQueryServerListWithServe, apiDelServerById } from '@/core/apis';
 
 export default defineComponent({
