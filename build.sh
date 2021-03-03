@@ -1,11 +1,11 @@
-app_name="vis-web-admin"
-app_version="0.0.8"
-
 source .env
 docker_user="vis"
 docker_pwd="visPower@2021"
 docker_project="vis"
 docker_domain="ub20-docker.com"
+
+app_name=$(echo $VUE_APP_NAME | sed -e 's/\r//g')
+app_version=$(echo $VUE_APP_RELEASE_VERSION | sed -e 's/\r//g')
 
 echo "node version: \c"
 node -v
@@ -15,6 +15,8 @@ echo "vue version: \c"
 vue -V
 echo "docker version: \c"
 docker -v
+
+npm i --verbose
 
 npm run build
 
